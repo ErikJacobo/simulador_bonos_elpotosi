@@ -166,64 +166,6 @@ if tipo_bono == "Daños":
         st.success(f"💰 Total Bono Acumulado: {formato_pesos(total_bono)}")
         st.caption("📌 Aplican restricciones y condiciones conforme al cuaderno oficial de Seguros El Potosí 2025.")
 
-# -------------------------- BLOQUE DE VIDA INDIVIDUAL Y VENTA MASIVA --------------------------
-if tipo_bono == "Vida Individual y Venta Masiva":
-    prod_vida = st.number_input("Producción 2025 Vida (Primer Año)", min_value=0.0, step=1000.0, format="%.2f")
-    conservacion = st.number_input("Índice de Conservación %", min_value=0.0, max_value=100.0, step=0.1)
-    num_negocios = st.number_input("Número de Negocios", min_value=0, step=1)
-    agente_novel_vida = st.checkbox("Agente nuevo en Vida")
-
-    if st.button("Calcular Bonos"):
-        resultados = []
-        total_bono = 0
-
-        # Bono Producción Vida
-        tabla_vida = [(2700000, 0.34), (2100000, 0.32), (1600000, 0.28), (1300000, 0.24), (920000, 0.18),
-                      (600000, 0.14), (300000, 0.085), (160000, 0.065)]
-        bono_vida = 0
-        for prod_min, porc in tabla_vida:
-            if prod_vida >= prod_min and conservacion >= 95 and num_negocios >= 4:
-                bono_vida = prod_vida * porc
-                resultados.append(("💼 Bono Producción Vida", bono_vida, f"Nivel {porc*100:.1f}%, conservación {conservacion}%, {num_negocios} negocios. ✅"))
-                total_bono += bono_vida
-                break
-        if bono_vida == 0:
-            resultados.append(("💼 Bono Producción Vida", 0, "No cumple con los requisitos de conservación o número de negocios. ❌"))
-
-        # Bono Agente Novel Vida (extra adicional)
-        if agente_novel_vida and num_negocios >= 4:
-            adicional = 0.0
-            if prod_vida >= 2700000:
-                adicional = 0.40
-            elif prod_vida >= 2100000:
-                adicional = 0.35
-            elif prod_vida >= 1600000:
-                adicional = 0.30
-            elif prod_vida >= 1300000:
-                adicional = 0.30
-            elif prod_vida >= 920000:
-                adicional = 0.25
-            elif prod_vida >= 600000:
-                adicional = 0.25
-            elif prod_vida >= 300000:
-                adicional = 0.20
-            elif prod_vida >= 160000:
-                adicional = 0.20
-            bono_extra = prod_vida * adicional
-            resultados.append(("💼 Bono Extra Agente Novel Vida", bono_extra, f"Agente novel con adicional del {adicional*100:.0f}%. ✅"))
-            total_bono += bono_extra
-        elif agente_novel_vida:
-            resultados.append(("💼 Bono Extra Agente Novel Vida", 0, "Producción insuficiente o < 4 negocios para bono adicional novel. ❌"))
-
-        # Mostrar resultados
-        st.markdown("---")
-        st.subheader(f"Resultados para {nombre}:")
-        for concepto, monto, nota in resultados:
-            st.write(f"**{concepto}**: {formato_pesos(monto)}")
-            st.caption(f"{nota}")
-
-        st.success(f"💰 Total Bono Acumulado: {formato_pesos(total_bono)}")
-        st.caption("📌 Aplican restricciones y condiciones conforme al cuaderno oficial de Seguros El Potosí 2025.")
 
 # -------------------------- BLOQUE DE VIDA INDIVIDUAL Y VENTA MASIVA --------------------------
 if tipo_bono == "Vida Individual y Venta Masiva":
