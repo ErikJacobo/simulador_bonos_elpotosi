@@ -13,7 +13,7 @@ with col2:
     st.image("link logo.jpg", width=90)
 
 st.markdown("---")
-nombre = st.text_input("👤 Nombre del Agente")
+nombre = st.text_input("Nombre del Agente")
 tipo_bono = st.selectbox("Selecciona el tipo de bono a calcular:",
                          ["Selecciona...", "Autos", "Daños", "Vida Individual y Venta Masiva", "Vida Grupo y Accidentes"])
 
