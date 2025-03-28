@@ -14,7 +14,7 @@ with col2:
 
 st.markdown("---")
 nombre = st.text_input("Nombre del Agente")
-tipo_bono = st.selectbox("Selecciona el tipo de ramo a simular:",
+tipo_bono = st.selectbox("Selecciona el ramo a simular:",
                          ["Selecciona...", "Autos", "Daños", "Vida Individual y Venta Masiva", "Vida Grupo y Accidentes"])
 
 def formato_pesos(valor):
